@@ -8,7 +8,7 @@ const getAll = async (_req, res) => {
 const getById = async (req, res, next) => {
     const { id } = req.params;
     const product = await ProductsService.getById(id);
-    if (product.error) next(product.error);
+    if (product.error) return next(product.error);
     res.status(200).json(product);
 };
 
