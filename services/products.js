@@ -8,4 +8,14 @@ const getById = async (id) => {
     return product[0];
 };
 
-module.exports = { getAll, getById };
+const createProduct = async (name, quantity) => {
+    const product = await ProductsModel.getByName(name);
+    if (product.length > 0) return { error: { code: 409, message: 'Product already exists' } };
+    return ProductsModel.createProduct(name, quantity);
+};
+
+module.exports = {
+    getAll,
+    getById,
+    createProduct, 
+};
