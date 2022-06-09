@@ -20,6 +20,8 @@ app.post('/products', validateProduct, rescue(ProductsController.createProduct))
 
 app.put('/products/:id', validateProduct, rescue(ProductsController.updateProduct));
 
+app.delete('/products/:id', rescue(ProductsController.deleteProduct));
+
 app.get('/sales', rescue(SalesController.getAll));
 
 app.get('/sales/:id', rescue(SalesController.getById));
