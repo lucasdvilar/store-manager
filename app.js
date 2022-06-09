@@ -29,6 +29,8 @@ app.get('/sales/:id', rescue(SalesController.getById));
 
 app.post('/sales', validateSale, rescue(SalesController.createSale));
 
+app.put('/sales/:id', validateSale, rescue(SalesController.updateSale));
+
 app.use((err, _req, res, _next) => {
   if (err.code && err.message) {
     return res.status(err.code).json({ message: err.message });
