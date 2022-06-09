@@ -3,6 +3,7 @@ const rescue = require('express-rescue');
 const ProductsController = require('./controllers/products');
 const SalesController = require('./controllers/sales');
 const validateProduct = require('./middlewares/validateProduct');
+const validateSale = require('./middlewares/validateSale');
 
 const app = express();
 app.use(express.json());
@@ -25,6 +26,8 @@ app.delete('/products/:id', rescue(ProductsController.deleteProduct));
 app.get('/sales', rescue(SalesController.getAll));
 
 app.get('/sales/:id', rescue(SalesController.getById));
+
+app.post('/sales', validateSale, rescue(SalesController.createSale));
 
 app.use((err, _req, res, _next) => {
   if (err.code && err.message) {
