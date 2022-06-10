@@ -34,11 +34,13 @@ describe('SalesService test', () => {
     describe('createSale test', () => {
         before(() => {
             sinon.stub(ProductsModel, 'getById').resolves([{}]);
+            sinon.stub(SalesModel, 'createSale').resolves(1);
             sinon.stub(SalesModel, 'createSalesProducts').resolves([[]]);
             sinon.stub(ProductsModel, 'updateQuantity').resolves([[]]);
         });
         after(() => {
             ProductsModel.getById.restore();
+            SalesModel.createSale.restore();
             SalesModel.createSalesProducts.restore();
             ProductsModel.updateQuantity.restore();
         });

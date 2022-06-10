@@ -46,6 +46,7 @@ describe('ProductsService test', () => {
     describe('updateProduct test', () => {
         before(() => {
             sinon.stub(ProductsModel, 'getById').resolves([{}]);
+            sinon.stub(ProductsModel, 'updateProduct').resolves({});
         });
         after(() => {
             ProductsModel.getById.restore();
