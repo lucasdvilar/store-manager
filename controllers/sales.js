@@ -12,9 +12,10 @@ const getById = async (req, res, next) => {
     res.status(200).json(sale);
 };
 
-const createSale = async (req, res) => {
+const createSale = async (req, res, next) => {
     const newSale = req.body;
     const sale = await SalesService.createSale(newSale);
+    if (sale.error) return next(sale.error);
     res.status(201).json(sale);
 };
 

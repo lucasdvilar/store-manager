@@ -10,6 +10,10 @@ const getById = async (id) => {
 };
 
 const createSale = async (newSale) => {
+    const product = await ProductsModel.getById(newSale[0].productId);
+    if (product[0].quantity < newSale[0].quantity) {
+        return { error: { code: 422, message: 'Such amount is not permitted to sell' } };
+    }
     const id = await SalesModel.createSale();
     await Promise.all(newSale
         .map(({ productId, quantity }) => SalesModel.createSalesProducts(id, productId, quantity)));
